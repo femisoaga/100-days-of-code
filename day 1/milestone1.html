@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      Milestone 1: Asynchronous JavaScript (Days 1-10) // Days 1-3: Introduction
+      to asynchronous programming, callbacks, and the event loop. Asynchronous
+      js
+    </p>
+    <script>
+      // ex:1
+      let lottery = new Promise(function (resolve, reject) {
+        console.log("Lottery is happening");
+
+        setTimeout(() => {
+          if (Math.random() >= 0.5) {
+            resolve("You Won!!!");
+          } else {
+            reject(new Error("Better luck next time"));
+          }
+        }, 5000);
+      });
+
+      lottery
+        .then((response) => {
+          console.log("something");
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log("error something");
+          console.log(err);
+        });
+
+      // ex:2
+
+      const fetchAPI = async function () {
+        try {
+          const res = await fetch("https://cat-fact.herokuapp.com/fact");
+          if (!res.ok) {
+            throw new Error("Custom Error");
+          }
+          const data = await res.json();
+          console.log(data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchAPI();
+      console.log("FIRST");
+
+      //ex:3
+      async function fetchData() {
+        try {
+          const response = await fetch("https://api.example.com/data");
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.log("Error:", error);
+        }
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>
